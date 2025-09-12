@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bug Bash 2025 — SVYASA, Bengaluru</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;font-size:16px;color:#222;margin:0}
+    header{background:#111;color:#fff;padding:36px 20px;text-align:center}
+    .logo{font-weight:800;font-size:28px;color:#7be04a}
+    .lead{max-width:900px;margin:18px auto;color:#ddd}
+    main{padding:28px;max-width:1000px;margin:0 auto}
+    .card{background:#f7f7f7;padding:20px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+    h1{margin:0 0 8px}
+    p.lead-text{color:#444}
+    .grid{display:flex;gap:20px;flex-wrap:wrap;margin-top:18px}
+    .left{flex:1 1 420px}
+    .right{flex:1 1 320px}
+    .btn{display:inline-block;background:#111;color:#fff;padding:12px 18px;border-radius:6px;text-decoration:none}
+    footer{padding:18px;text-align:center;color:#666;font-size:14px}
+    @media(max-width:720px){.grid{flex-direction:column}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">BUG BASH 2025</div>
+    <div class="lead">24-hour student hackathon • SVYASA, Bengaluru • First week of November 2025</div>
+  </header>
+
+  <main>
+    <div class="grid">
+      <div class="left card">
+        <h1>About Bug Bash</h1>
+        <p class="lead-text">
+          Bug Bash 2025 is a 24-hour hackathon for students to build projects in AI, Web, Mobile and Hardware.
+          Expect mentors, workshops, prizes and sponsor booths. Teams of 3–5. Participants: 200+.
+        </p>
+
+        <h3>Tracks</h3>
+        <ul>
+          <li>AI for Good</li>
+          <li>Smart Campus</li>
+          <li>FinTech & E-commerce</li>
+          <li>Open Innovation</li>
+        </ul>
+
+        <p><a class="btn" href="#register">Register Now</a></p>
+      </div>
+
+      <div class="right card" id="register">
+        <h2>Register</h2>
+        <p>Fill this form to secure your team slot.</p>
+
+        <!-- Option A: embed Google Form (recommended for non-technical) -->
+        <!-- Replace the src with your Google Form embed link -->
+        <div style="margin-top:12px">
+          <iframe src="https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/viewform?embedded=true"
+                  width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        </div>
+
+        <!-- Option B (alternate): uncomment and use Formspree endpoint instead of Google Form
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="margin-top:12px">
+          <label>Team name<br><input name="team" required style="width:100%;padding:10px;margin-top:6px"></label>
+          <label style="display:block;margin-top:8px">Members (names + emails)<br>
+            <textarea name="members" rows="4" style="width:100%;padding:10px;margin-top:6px" required></textarea>
+          </label>
+          <label style="display:block;margin-top:8px">GitHub / Project idea<br>
+            <input name="github" style="width:100%;padding:10px;margin-top:6px">
+          </label>
+          <button class="btn" type="submit" style="margin-top:12px">Submit registration</button>
+        </form>
+        -->
+
+      </div>
+    </div>
+
+    <section style="margin-top:18px">
+      <div class="card">
+        <h3>Sponsors</h3>
+        <p>Platinum, Gold, Silver and Goodies partners. Contact: <strong>geetansh@bugbash.me</strong></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>© Bug Bash 2025 • SVYASA Deemed to be University • <a href="mailto:contact@bugbash.me">contact@bugbash.me</a></footer>
+</body>
+</html>
