@@ -1,87 +1,322 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Bug Bash 2025 — SVYASA, Bengaluru</title>
-  <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;font-size:16px;color:#222;margin:0}
-    header{background:#111;color:#fff;padding:36px 20px;text-align:center}
-    .logo{font-weight:800;font-size:28px;color:#7be04a}
-    .lead{max-width:900px;margin:18px auto;color:#ddd}
-    main{padding:28px;max-width:1000px;margin:0 auto}
-    .card{background:#f7f7f7;padding:20px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
-    h1{margin:0 0 8px}
-    p.lead-text{color:#444}
-    .grid{display:flex;gap:20px;flex-wrap:wrap;margin-top:18px}
-    .left{flex:1 1 420px}
-    .right{flex:1 1 320px}
-    .btn{display:inline-block;background:#111;color:#fff;padding:12px 18px;border-radius:6px;text-decoration:none}
-    footer{padding:18px;text-align:center;color:#666;font-size:14px}
-    @media(max-width:720px){.grid{flex-direction:column}}
-  </style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Bug Bash 2025 — SVYASA Bengaluru</title>
+<meta name="description" content="Bug Bash 2025 — 24 hour hackathon at SVYASA Bengaluru. Build. Code. Win.">
+<style>
+  :root{
+    --bg1:#0f1720; --bg2:#0b1020; --accent:#7be04a; --glass:rgba(255,255,255,0.06);
+    --muted:#97a0ad; --card:#0f1620; --glass2:rgba(255,255,255,0.03);
+    --white: #f7f8fa;
+    --shadow: 0 12px 30px rgba(2,6,23,0.6);
+    --mono: 'Segoe UI', Roboto, Helvetica, Arial, system-ui;
+  }
+  html,body{height:100%;margin:0;font-family:var(--mono);background:
+    radial-gradient(1200px 600px at 10% 10%, rgba(123,224,74,0.03), transparent),
+    linear-gradient(180deg,var(--bg1),var(--bg2)); color:var(--white);-webkit-font-smoothing:antialiased}
+  /* canvas particle sits behind everything */
+  #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.65}
+
+  .wrap{position:relative;z-index:2;max-width:1200px;margin:32px auto;padding:28px}
+  header{display:flex;align-items:center;gap:18px;padding:18px 0}
+  .logo{
+    display:flex;align-items:center;gap:12px;
+  }
+  .bug-mark{
+    width:72px;height:72px;background:linear-gradient(180deg,var(--accent),#33c23d);
+    display:grid;place-items:center;border-radius:14px;box-shadow:0 10px 30px rgba(123,224,74,0.08);
+    transform:translateZ(0);
+  }
+  .bug-mark svg{width:44px;height:44px;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.5))}
+  .brand{font-weight:800;font-size:20px;letter-spacing:0.6px}
+  .sub{color:var(--muted);font-size:13px;margin-top:4px}
+
+  .hero{
+    display:grid;grid-template-columns:1fr 420px;gap:28px;margin-top:18px;align-items:center;
+  }
+  @media(max-width:920px){.hero{grid-template-columns:1fr;}}
+  .panel{background:linear-gradient(180deg,var(--glass),transparent);padding:28px;border-radius:14px;box-shadow:var(--shadow);backdrop-filter:blur(6px)}
+  .title{font-size:44px;line-height:1;margin:0 0 8px}
+  .lead{color:var(--muted);font-size:16px;margin:0 0 18px}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{background:var(--accent);color:#061217;padding:12px 18px;border-radius:10px;font-weight:700;text-decoration:none;display:inline-block;box-shadow:0 8px 20px rgba(123,224,74,0.12)}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--white)}
+
+  /* cards */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+  @media(max-width:920px){.cards{grid-template-columns:repeat(1,1fr)}}
+  .card{background:linear-gradient(180deg,var(--glass2),transparent);padding:18px;border-radius:12px}
+  .card h4{margin:0 0 8px}
+  .muted{color:var(--muted);font-size:14px}
+
+  /* schedule */
+  .schedule{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+  @media(max-width:720px){.schedule{grid-template-columns:1fr}}
+
+  /* sponsors row */
+  .sponsors{display:flex;flex-wrap:wrap;gap:12px;align-items:center; margin-top:16px}
+  .sponsor{width:120px;height:48px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
+
+  /* registration form */
+  form .row{display:flex;gap:8px}
+  form input, form textarea, form select{
+    width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--white);outline:none
+  }
+  form label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+  .form-ghost{background:transparent;border:1px dashed rgba(255,255,255,0.06);padding:12px;border-radius:10px;color:var(--muted)}
+  .note{font-size:13px;color:var(--muted);margin-top:8px}
+
+  footer{margin-top:38px;text-align:center;color:var(--muted);font-size:13px;padding:18px}
+
+  /* fun animated elements */
+  .glitch{
+    position:relative;display:inline-block;color:var(--white);font-weight:900;
+    filter:drop-shadow(0 8px 30px rgba(0,0,0,0.6))
+  }
+  .glitch::before,.glitch::after{
+    content:attr(data-text);position:absolute;left:0;top:0;mix-blend-mode:screen;opacity:.6
+  }
+  .glitch::before{color:#ff3b81;transform:translate(4px,-2px);clip-path:polygon(0 0,100% 0,100% 45%,0 45%);animation:shake .9s infinite linear}
+  .glitch::after{color:#33c2ff;transform:translate(-5px,3px);clip-path:polygon(0 55%,100% 55%,100% 100%,0 100%);animation:shake2 1.2s infinite linear}
+  @keyframes shake{0%{transform:translate(4px,-2px)}50%{transform:translate(2px,1px)}100%{transform:translate(4px,-2px)}}
+  @keyframes shake2{0%{transform:translate(-5px,3px)}50%{transform:translate(-2px,6px)}100%{transform:translate(-5px,3px)}}
+
+  /* floating bug CTA */
+  .floating-bug{position:fixed;right:28px;bottom:28px;background:linear-gradient(180deg,var(--accent),#3fd24e);padding:14px;border-radius:14px;box-shadow:0 16px 40px rgba(10,20,10,0.6);z-index:4}
+  .floating-bug svg{width:34px;height:34px;display:block}
+
+  /* tiny responsiveness */
+  @media(max-width:520px){
+    .title{font-size:32px}
+    .bug-mark{width:60px;height:60px}
+  }
+</style>
 </head>
 <body>
+
+<canvas id="bg-canvas"></canvas>
+
+<div class="wrap">
   <header>
-    <div class="logo">BUG BASH 2025</div>
-    <div class="lead">24-hour student hackathon • SVYASA, Bengaluru • First week of November 2025</div>
-  </header>
-
-  <main>
-    <div class="grid">
-      <div class="left card">
-        <h1>About Bug Bash</h1>
-        <p class="lead-text">
-          Bug Bash 2025 is a 24-hour hackathon for students to build projects in AI, Web, Mobile and Hardware.
-          Expect mentors, workshops, prizes and sponsor booths. Teams of 3–5. Participants: 200+.
-        </p>
-
-        <h3>Tracks</h3>
-        <ul>
-          <li>AI for Good</li>
-          <li>Smart Campus</li>
-          <li>FinTech & E-commerce</li>
-          <li>Open Innovation</li>
-        </ul>
-
-        <p><a class="btn" href="#register">Register Now</a></p>
+    <div class="logo">
+      <div class="bug-mark" aria-hidden="true">
+        <!-- stylized bug SVG -->
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g fill="#061217"><path d="M32 38a12 12 0 1 0 0-24 12 12 0 0 0 0 24z" fill="#061217" opacity="0.06"/></g>
+          <g fill="#061217"><path d="M32 6c-2 0-4 .8-5.6 2.2C27 9.5 29.3 10 32 10s5-0.5 5.6-1.8C36 6.8 34 6 32 6z"/></g>
+          <path d="M32 8c5 0 9 4 9 9v6h6v2h-6v14h-2v8a4 4 0 0 1-4 4h-6a4 4 0 0 1-4-4v-8h-2V34H9v-2h6v-6c0-5 4-9 9-9z" fill="#061217" opacity="0.12"/>
+          <path d="M44 28h6v-2h-6v2zM20 28H14v-2h6v2z" fill="#061217" opacity="0.12"/>
+          <path d="M32 12a10 10 0 1 0 0 20 10 10 0 0 0 0-20z" fill="#fff" opacity="0.05"/>
+          <g transform="translate(0,0)"><path d="M40 12c0-4.4-3.6-8-8-8s-8 3.6-8 8" fill="none" stroke="#fff" stroke-opacity="0.04" stroke-width="1"/></g>
+        </svg>
       </div>
-
-      <div class="right card" id="register">
-        <h2>Register</h2>
-        <p>Fill this form to secure your team slot.</p>
-
-        <!-- Option A: embed Google Form (recommended for non-technical) -->
-        <!-- Replace the src with your Google Form embed link -->
-        <div style="margin-top:12px">
-          <iframe src="https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/viewform?embedded=true"
-                  width="100%" height="520" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-        </div>
-
-        <!-- Option B (alternate): uncomment and use Formspree endpoint instead of Google Form
-        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" style="margin-top:12px">
-          <label>Team name<br><input name="team" required style="width:100%;padding:10px;margin-top:6px"></label>
-          <label style="display:block;margin-top:8px">Members (names + emails)<br>
-            <textarea name="members" rows="4" style="width:100%;padding:10px;margin-top:6px" required></textarea>
-          </label>
-          <label style="display:block;margin-top:8px">GitHub / Project idea<br>
-            <input name="github" style="width:100%;padding:10px;margin-top:6px">
-          </label>
-          <button class="btn" type="submit" style="margin-top:12px">Submit registration</button>
-        </form>
-        -->
-
+      <div>
+        <div class="brand">BUG BASH <span style="color:var(--accent)">2025</span></div>
+        <div class="sub">SVYASA • First week of November • 24-hour student hackathon</div>
       </div>
     </div>
+  </header>
 
-    <section style="margin-top:18px">
-      <div class="card">
-        <h3>Sponsors</h3>
-        <p>Platinum, Gold, Silver and Goodies partners. Contact: <strong>geetansh@bugbash.me</strong></p>
+  <main class="hero">
+    <section class="panel" aria-labelledby="hero-title">
+      <h1 id="hero-title" class="title">Hack. Break. Build. <span class="glitch" data-text="Bug Bash">Bug Bash</span></h1>
+      <p class="lead">Bug Bash 2025 is a 24-hour student hackathon at SVYASA, Bengaluru. Teams of 3–5 will design and ship prototypes across AI, Web, Mobile and Hardware. Mentors. Workshops. Prizes.</p>
+
+      <div class="cta-row">
+        <a class="btn" href="#register">Register your team</a>
+        <a class="btn ghost" href="#sponsors">Sponsor / Partner</a>
+      </div>
+
+      <div class="cards" aria-hidden="false">
+        <div class="card">
+          <h4>Tracks</h4>
+          <div class="muted">AI for Good • Smart Campus • FinTech • Open Innovation</div>
+        </div>
+        <div class="card">
+          <h4>Prizes</h4>
+          <div class="muted">Cash prizes, internships, cloud credits, gadgets and sponsor goodies.</div>
+        </div>
+        <div class="card">
+          <h4>Who should join?</h4>
+          <div class="muted">Students, tinkerers, product builders, and anyone who loves shipping code under pressure.</div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px" class="card">
+        <h4>Schedule (high level)</h4>
+        <div class="schedule">
+          <div><strong>Day 1</strong><br/><span class="muted">Registration → Keynote → Hacking starts</span></div>
+          <div><strong>Day 2</strong><br/><span class="muted">Final demos → Judging → Awards</span></div>
+        </div>
       </div>
     </section>
+
+    <!-- RIGHT column: registration -->
+    <aside id="register" class="panel">
+      <h2 style="margin-top:0">Register your team</h2>
+      <p class="muted">Quick sign-up. We'll email instructions and confirmation.</p>
+
+      <!-- Option 1: Use inline form (Formspree) -->
+      <form id="regForm" class="card" style="padding:12px;margin-top:12px" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+        <label>Team name<input name="team_name" placeholder="Team Phoenix" required></label>
+        <label>Leader name & email<input name="leader" placeholder="Full name • email@example.com" required></label>
+        <label>Member details <small class="muted">(comma separated: name - email)</small>
+          <textarea name="members" rows="3" placeholder="Alice - a@x.com, Bob - b@x.com" required></textarea>
+        </label>
+        <label>Track
+          <select name="track" required>
+            <option value="">Select a track</option>
+            <option>AI for Good</option>
+            <option>Smart Campus</option>
+            <option>FinTech</option>
+            <option>Open Innovation</option>
+          </select>
+        </label>
+        <label>Short idea summary <small class="muted">(one-liner)</small>
+          <input name="idea" placeholder="One-line idea">
+        </label>
+
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <button class="btn" type="submit">Submit registration</button>
+          <button id="demoBtn" type="button" class="btn ghost">Preview event PDF</button>
+        </div>
+
+        <div id="formMsg" class="note" style="display:none"></div>
+      </form>
+
+      <div style="margin-top:12px" class="card">
+        <h4>Need a simpler option?</h4>
+        <p class="muted">Use our Google Form instead. (Good if you prefer sheet responses.)</p>
+        <!-- Replace the src below with your Google Form embed link if you prefer -->
+        <!-- <iframe src="https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/viewform?embedded=true" width="100%" height="360" frameborder="0">Loading…</iframe> -->
+        <div class="form-ghost">Google Form embed option is available. Ask if you want me to enable it.</div>
+      </div>
+
+      <div style="margin-top:12px" class="card">
+        <h4>Contact</h4>
+        <div class="muted">Email: <a href="mailto:contact@bugbash.me" style="color:var(--accent)">contact@bugbash.me</a><br/>Phone: +91 96942 41206</div>
+      </div>
+    </aside>
   </main>
 
-  <footer>© Bug Bash 2025 • SVYASA Deemed to be University • <a href="mailto:contact@bugbash.me">contact@bugbash.me</a></footer>
+  <section id="sponsors" style="margin-top:22px" class="panel">
+    <h3 style="margin:0 0 12px">Sponsors & Partners</h3>
+    <div class="sponsors">
+      <div class="sponsor">Red Bull</div>
+      <div class="sponsor">Postman</div>
+      <div class="sponsor">Domino's</div>
+      <div class="sponsor">GitHub</div>
+      <div class="sponsor">Replit</div>
+      <div class="sponsor">Yubico</div>
+    </div>
+
+    <div style="margin-top:16px" class="card">
+      <h4>Want to sponsor?</h4>
+      <p class="muted">We offer Title, Gold, Silver and Goodies partnerships. Reach us at <a style="color:var(--accent)" href="mailto:contact@bugbash.me">contact@bugbash.me</a>.</p>
+    </div>
+  </section>
+
+  <footer>
+    © Bug Bash 2025 • SVYASA Deemed to be University, Bengaluru • <a href="mailto:contact@bugbash.me" style="color:var(--muted)">contact@bugbash.me</a>
+  </footer>
+</div>
+
+<!-- floating quick-register CTA -->
+<a class="floating-bug" href="#register" title="Register now">
+  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="32" cy="32" r="28" fill="#02110b" opacity="0.08"/>
+    <path d="M32 14c5 0 9 4 9 9v6h6v2h-6v14h-2v8a4 4 0 0 1-4 4h-6a4 4 0 0 1-4-4v-8h-2V34H9v-2h6v-6c0-5 4-9 9-9z" fill="#061217" opacity="0.12"/>
+    <path d="M32 20a8 8 0 1 0 0 16 8 8 0 0 0 0-16z" fill="#fff" opacity="0.06"/>
+    <path d="M32 12c-2 0-4 .8-5.6 2.2C27 15.5 29.3 16 32 16s5-0.5 5.6-1.8C36 12.8 34 12 32 12z" fill="#7be04a"/>
+  </svg>
+</a>
+
+<script>
+/* ---------- Canvas particles background ---------- */
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let w=canvas.width=innerWidth, h=canvas.height=innerHeight;
+window.addEventListener('resize', ()=>{w=canvas.width=innerWidth; h=canvas.height=innerHeight; init()});
+
+const particles=[];
+const count = Math.max(30, Math.floor((w*h)/80000));
+function rand(min,max){return Math.random()*(max-min)+min}
+function init(){
+  particles.length=0;
+  for(let i=0;i<count;i++){
+    particles.push({
+      x: rand(0,w), y: rand(0,h),
+      r: rand(0.6,2.6),
+      vx: rand(-0.4,0.6), vy: rand(-0.2,0.4),
+      hue: rand(120,200), life: rand(30,80)
+    });
+  }
+}
+function step(){
+  ctx.clearRect(0,0,w,h);
+  // subtle radial glow
+  const g = ctx.createLinearGradient(0,0,w,h);
+  g.addColorStop(0,'rgba(11,16,32,0.12)');
+  g.addColorStop(1,'rgba(2,4,10,0.2)');
+  ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
+
+  for(let p of particles){
+    p.x += p.vx; p.y += p.vy; p.life -= 0.2;
+    if(p.x < -20) p.x = w+20;
+    if(p.x > w+20) p.x = -20;
+    if(p.y < -20) p.y = h+20;
+    if(p.y > h+20) p.y = -20;
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(123,224,74,${0.06 + (p.r/6)})`;
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+  }
+  // connect near particles (very subtle)
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const a = particles[i], b = particles[j];
+      const dx=a.x-b.x, dy=a.y-b.y, d=dx*dx+dy*dy;
+      if(d<9000){
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(123,224,74,${0.003 + (9000-d)/12000})`;
+        ctx.lineWidth = 1; ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(step);
+}
+init(); step();
+
+/* ---------- small UI enhancements ---------- */
+document.getElementById('demoBtn').addEventListener('click', ()=> {
+  alert('Event PDF preview not yet uploaded. We will provide branded assets and sponsor deck on request.');
+});
+
+/* ---------- Form: show success/failure message clientside ---------- */
+const regForm = document.getElementById('regForm');
+const formMsg = document.getElementById('formMsg');
+regForm.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  formMsg.style.display='block'; formMsg.textContent='Submitting...';
+  const data = new FormData(regForm);
+  try{
+    // Formspree expects a POST to action; we attempt fetch for nicer UX.
+    const resp = await fetch(regForm.action, {method:'POST',body:data,headers:{'Accept':'application/json'}});
+    if(resp.ok){ formMsg.textContent = 'Registration submitted. We will email confirmation soon.'; regForm.reset(); }
+    else {
+      formMsg.textContent = 'Submission failed. Please email contact@bugbash.me with team details.';
+    }
+  } catch(err){
+    formMsg.textContent = 'Network error. Please email contact@bugbash.me to register.';
+  }
+});
+
+/* ---------- small keyboard shortcut: press 'r' to focus register ---------- */
+window.addEventListener('keydown',(e)=>{ if(e.key==='r' || e.key==='R'){ document.getElementById('regForm').scrollIntoView({behavior:'smooth'}); document.querySelector('input[name="team_name"]').focus(); }});
+
+/* ---------- tiny analytics stub (console) ---------- */
+console.log('Bug Bash front-end loaded. Host ready for deployment.');
+</script>
 </body>
 </html>
