@@ -16,7 +16,6 @@
   html,body{height:100%;margin:0;font-family:var(--mono);background:
     radial-gradient(1200px 600px at 10% 10%, rgba(123,224,74,0.03), transparent),
     linear-gradient(180deg,var(--bg1),var(--bg2)); color:var(--white);-webkit-font-smoothing:antialiased}
-  /* canvas particle sits behind everything */
   #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.65}
 
   .wrap{position:relative;z-index:2;max-width:1200px;margin:32px auto;padding:28px}
@@ -43,24 +42,18 @@
   .cta-row{display:flex;gap:12px;flex-wrap:wrap}
   .btn{background:var(--accent);color:#061217;padding:12px 18px;border-radius:10px;font-weight:700;text-decoration:none;display:inline-block;box-shadow:0 8px 20px rgba(123,224,74,0.12)}
   .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--white)}
-
-  /* cards */
   .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
   @media(max-width:920px){.cards{grid-template-columns:repeat(1,1fr)}}
   .card{background:linear-gradient(180deg,var(--glass2),transparent);padding:18px;border-radius:12px}
   .card h4{margin:0 0 8px}
   .muted{color:var(--muted);font-size:14px}
-
-  /* schedule */
   .schedule{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
   @media(max-width:720px){.schedule{grid-template-columns:1fr}}
 
-  /* sponsors row */
   .sponsors{display:flex;flex-wrap:wrap;gap:12px;align-items:center; margin-top:16px}
   .sponsor{width:120px;height:48px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
   .sponsor img{max-height:38px;max-width:110px;display:block;object-fit:contain}
 
-  /* registration form */
   form .row{display:flex;gap:8px}
   form input, form textarea, form select{
     width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--white);outline:none
@@ -71,7 +64,6 @@
 
   footer{margin-top:38px;text-align:center;color:var(--muted);font-size:13px;padding:18px}
 
-  /* fun animated elements */
   .glitch{
     position:relative;display:inline-block;color:var(--white);font-weight:900;
     filter:drop-shadow(0 8px 30px rgba(0,0,0,0.6))
@@ -84,11 +76,9 @@
   @keyframes shake{0%{transform:translate(4px,-2px)}50%{transform:translate(2px,1px)}100%{transform:translate(4px,-2px)}}
   @keyframes shake2{0%{transform:translate(-5px,3px)}50%{transform:translate(-2px,6px)}100%{transform:translate(-5px,3px)}}
 
-  /* floating bug CTA */
   .floating-bug{position:fixed;right:28px;bottom:28px;background:linear-gradient(180deg,var(--accent),#3fd24e);padding:14px;border-radius:14px;box-shadow:0 16px 40px rgba(10,20,10,0.6);z-index:4}
   .floating-bug img{width:34px;height:34px;display:block}
 
-  /* tiny responsiveness */
   @media(max-width:520px){
     .title{font-size:32px}
     .bug-mark{width:60px;height:60px}
@@ -103,8 +93,7 @@
   <header>
     <div class="logo">
       <div class="bug-mark" aria-hidden="true">
-        <!-- site logo: updated to point at your BugBash repo (replace branch if needed) -->
-        <img src="https://raw.githubusercontent.com/geetxnshgoyal/BugBash/main/logo.png" alt="Bug Bash logo" id="site-logo">
+        <img src="https://raw.githubusercontent.com/geetxnshgoyal/BugBash/main/logo.png" alt="Bug Bash logo" id="site-logo"> <!-- need to change -->
       </div>
       <div>
         <div class="brand">BUG BASH <span style="color:var(--accent)">2025</span></div>
@@ -179,13 +168,7 @@
 
         <div id="formMsg" class="note" style="display:none"></div>
       </form>
-
-      <div style="margin-top:12px" class="card">
-        <h4>Need a simpler option?</h4>
-        <p class="muted">Use our Google Form instead. (Good if you prefer sheet responses.)</p>
-        <div class="form-ghost">Google Form embed option is available. Ask if you want me to enable it.</div>
-      </div>
-
+      
       <div style="margin-top:12px" class="card">
         <h4>Contact</h4>
         <div class="muted">Email: <a href="mailto:contact@bugbash.me" style="color:var(--accent)">contact@bugbash.me</a><br/>Phone: +91 96942 41206</div>
@@ -199,8 +182,7 @@
       <!-- existing sponsor placeholders -->
       <!-- Added clickable Pure Buttons sponsor logo. The anchor opens the MLH link in a new tab. -->
       <a class="sponsor" href="https://mlh.link/MLH-PureButtons-hackathons" target="_blank" rel="noopener noreferrer" title="Pure Buttons — MLH">
-        <!-- Try raw GitHub path first. If you host the SVG at this path in your repo it will load.
-             Otherwise replace src with a reachable URL or the path where you've uploaded the SVG. -->
+
 <svg style="background: white; height: auto; border-radius: 12px; padding: 5px;" version="1.0" xmlns="http://www.w3.org/2000/svg"
  width="2881.000000pt" height="1130.000000pt" viewBox="0 0 2881.000000 1130.000000"
  preserveAspectRatio="xMidYMid meet">
@@ -287,14 +269,7 @@ l0 3135 674 0 674 0 7 -299 8 -300 86 58 c397 267 834 434 1341 514 116 18
 433 -18 177 -162 327 -343 356 -32 6 -147 10 -255 10 l-198 0 0 -405z"/>
 </g>
 </svg>
-<!-- 
-        <img src="https://raw.githubusercontent.com/geetxnshgoyal/BugBash/main/assets/Pure-Buttons-Blue-Gradient-Logo-RGB.svg"
-             alt="Pure Buttons logo"
-             onerror="this.onerror=null; this.src='/assets/Pure-Buttons-Blue-Gradient-Logo-RGB.svg'; console.warn('Sponsor logo failed to load from GitHub raw.');"> -->
       </a>
-
-      <!-- Example of a text sponsor placeholder retained for other sponsors -->
-      <div class="sponsor">Community Partner</div>
     </div>
 
     <div style="margin-top:16px" class="card">
