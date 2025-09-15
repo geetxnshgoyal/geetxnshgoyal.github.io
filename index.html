@@ -27,9 +27,9 @@
   .bug-mark{
     width:72px;height:72px;background:linear-gradient(180deg,var(--accent),#33c23d);
     display:grid;place-items:center;border-radius:14px;box-shadow:0 10px 30px rgba(123,224,74,0.08);
-    transform:translateZ(0);
+    transform:translateZ(0); overflow:hidden;
   }
-  .bug-mark svg{width:44px;height:44px;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.5))}
+  .bug-mark img{width:56px;height:56px;object-fit:contain;display:block}
   .brand{font-weight:800;font-size:20px;letter-spacing:0.6px}
   .sub{color:var(--muted);font-size:13px;margin-top:4px}
 
@@ -85,7 +85,7 @@
 
   /* floating bug CTA */
   .floating-bug{position:fixed;right:28px;bottom:28px;background:linear-gradient(180deg,var(--accent),#3fd24e);padding:14px;border-radius:14px;box-shadow:0 16px 40px rgba(10,20,10,0.6);z-index:4}
-  .floating-bug svg{width:34px;height:34px;display:block}
+  .floating-bug img{width:34px;height:34px;display:block}
 
   /* tiny responsiveness */
   @media(max-width:520px){
@@ -102,15 +102,11 @@
   <header>
     <div class="logo">
       <div class="bug-mark" aria-hidden="true">
-        <!-- stylized bug SVG -->
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <g fill="#061217"><path d="M32 38a12 12 0 1 0 0-24 12 12 0 0 0 0 24z" fill="#061217" opacity="0.06"/></g>
-          <g fill="#061217"><path d="M32 6c-2 0-4 .8-5.6 2.2C27 9.5 29.3 10 32 10s5-0.5 5.6-1.8C36 6.8 34 6 32 6z"/></g>
-          <path d="M32 8c5 0 9 4 9 9v6h6v2h-6v14h-2v8a4 4 0 0 1-4 4h-6a4 4 0 0 1-4-4v-8h-2V34H9v-2h6v-6c0-5 4-9 9-9z" fill="#061217" opacity="0.12"/>
-          <path d="M44 28h6v-2h-6v2zM20 28H14v-2h6v2z" fill="#061217" opacity="0.12"/>
-          <path d="M32 12a10 10 0 1 0 0 20 10 10 0 0 0 0-20z" fill="#fff" opacity="0.05"/>
-          <g transform="translate(0,0)"><path d="M40 12c0-4.4-3.6-8-8-8s-8 3.6-8 8" fill="none" stroke="#fff" stroke-opacity="0.04" stroke-width="1"/></g>
-        </svg>
+        <!-- Replace the URL below with the raw URL to your logo on GitHub.
+             Example raw URL format:
+             https://raw.githubusercontent.com/USERNAME/REPO/BRANCH/path/to/logo.png
+        -->
+        <img src="https://raw.githubusercontent.com/USERNAME/REPO/BRANCH/logo.png" alt="Bug Bash logo" id="site-logo">
       </div>
       <div>
         <div class="brand">BUG BASH <span style="color:var(--accent)">2025</span></div>
@@ -189,8 +185,6 @@
       <div style="margin-top:12px" class="card">
         <h4>Need a simpler option?</h4>
         <p class="muted">Use our Google Form instead. (Good if you prefer sheet responses.)</p>
-        <!-- Replace the src below with your Google Form embed link if you prefer -->
-        <!-- <iframe src="https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID/viewform?embedded=true" width="100%" height="360" frameborder="0">Loading…</iframe> -->
         <div class="form-ghost">Google Form embed option is available. Ask if you want me to enable it.</div>
       </div>
 
@@ -204,6 +198,7 @@
   <section id="sponsors" style="margin-top:22px" class="panel">
     <h3 style="margin:0 0 12px">Sponsors & Partners</h3>
     <div class="sponsors">
+      <!-- sponsor logos will be appended here dynamically or add static divs -->
     </div>
 
     <div style="margin-top:16px" class="card">
@@ -217,14 +212,9 @@
   </footer>
 </div>
 
-<!-- floating quick-register CTA -->
+<!-- floating quick-register CTA (uses same GitHub logo image) -->
 <a class="floating-bug" href="#register" title="Register now">
-  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <circle cx="32" cy="32" r="28" fill="#02110b" opacity="0.08"/>
-    <path d="M32 14c5 0 9 4 9 9v6h6v2h-6v14h-2v8a4 4 0 0 1-4 4h-6a4 4 0 0 1-4-4v-8h-2V34H9v-2h6v-6c0-5 4-9 9-9z" fill="#061217" opacity="0.12"/>
-    <path d="M32 20a8 8 0 1 0 0 16 8 8 0 0 0 0-16z" fill="#fff" opacity="0.06"/>
-    <path d="M32 12c-2 0-4 .8-5.6 2.2C27 15.5 29.3 16 32 16s5-0.5 5.6-1.8C36 12.8 34 12 32 12z" fill="#7be04a"/>
-  </svg>
+  <img src="https://raw.githubusercontent.com/USERNAME/REPO/BRANCH/logo.png" alt="Register">
 </a>
 
 <script>
@@ -295,7 +285,6 @@ regForm.addEventListener('submit', async (e)=>{
   formMsg.style.display='block'; formMsg.textContent='Submitting...';
   const data = new FormData(regForm);
   try{
-    // Formspree expects a POST to action; we attempt fetch for nicer UX.
     const resp = await fetch(regForm.action, {method:'POST',body:data,headers:{'Accept':'application/json'}});
     if(resp.ok){ formMsg.textContent = 'Registration submitted. We will email confirmation soon.'; regForm.reset(); }
     else {
@@ -311,6 +300,14 @@ window.addEventListener('keydown',(e)=>{ if(e.key==='r' || e.key==='R'){ documen
 
 /* ---------- tiny analytics stub (console) ---------- */
 console.log('Bug Bash front-end loaded. Host ready for deployment.');
+
+/* ---------- optional: load logo fallback if GitHub raw blocked ---------- */
+const logo = document.getElementById('site-logo');
+logo.addEventListener('error', ()=> {
+  // fallback: try an alternate path or shrink to SVG if needed
+  // Replace with a CDN or other URL if raw.githubusercontent.com is blocked in your environment.
+  console.warn('Logo failed to load from GitHub raw. Please update the img src to a reachable URL.');
+});
 </script>
 </body>
 </html>
