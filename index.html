@@ -58,6 +58,7 @@
   /* sponsors row */
   .sponsors{display:flex;flex-wrap:wrap;gap:12px;align-items:center; margin-top:16px}
   .sponsor{width:120px;height:48px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
+  .sponsor img{max-height:38px;max-width:110px;display:block;object-fit:contain}
 
   /* registration form */
   form .row{display:flex;gap:8px}
@@ -102,11 +103,8 @@
   <header>
     <div class="logo">
       <div class="bug-mark" aria-hidden="true">
-        <!-- Replace the URL below with the raw URL to your logo on GitHub.
-             Example raw URL format:
-             https://raw.githubusercontent.com/USERNAME/REPO/BRANCH/path/to/logo.png
-        -->
-        <img src="https://raw.githubusercontent.com/geetxnshgoyal/geetxnshgoyal.github.io/logo.png" alt="Bug Bash logo" id="site-logo">
+        <!-- site logo: updated to point at your BugBash repo (replace branch if needed) -->
+        <img src="https://raw.githubusercontent.com/geetxnshgoyal/BugBash/main/logo.png" alt="Bug Bash logo" id="site-logo">
       </div>
       <div>
         <div class="brand">BUG BASH <span style="color:var(--accent)">2025</span></div>
@@ -198,7 +196,18 @@
   <section id="sponsors" style="margin-top:22px" class="panel">
     <h3 style="margin:0 0 12px">Sponsors & Partners</h3>
     <div class="sponsors">
-      <!-- sponsor logos will be appended here dynamically or add static divs -->
+      <!-- existing sponsor placeholders -->
+      <!-- Added clickable Pure Buttons sponsor logo. The anchor opens the MLH link in a new tab. -->
+      <a class="sponsor" href="https://mlh.link/MLH-PureButtons-hackathons" target="_blank" rel="noopener noreferrer" title="Pure Buttons — MLH">
+        <!-- Try raw GitHub path first. If you host the SVG at this path in your repo it will load.
+             Otherwise replace src with a reachable URL or the path where you've uploaded the SVG. -->
+        <img src="https://raw.githubusercontent.com/geetxnshgoyal/BugBash/main/assets/Pure-Buttons-Blue-Gradient-Logo-RGB.svg"
+             alt="Pure Buttons logo"
+             onerror="this.onerror=null; this.src='/assets/Pure-Buttons-Blue-Gradient-Logo-RGB.svg'; console.warn('Sponsor logo failed to load from GitHub raw.');">
+      </a>
+
+      <!-- Example of a text sponsor placeholder retained for other sponsors -->
+      <div class="sponsor">Community Partner</div>
     </div>
 
     <div style="margin-top:16px" class="card">
@@ -212,9 +221,9 @@
   </footer>
 </div>
 
-<!-- floating quick-register CTA (uses same GitHub logo image) -->
+<!-- floating quick-register CTA (uses your BugBash repo logo) -->
 <a class="floating-bug" href="#register" title="Register now">
-  <img src="https://raw.githubusercontent.com/USERNAME/REPO/BRANCH/logo.png" alt="Register">
+  <img src="https://raw.githubusercontent.com/geetxnshgoyal/BugBash/main/logo.png" alt="Register">
 </a>
 
 <script>
